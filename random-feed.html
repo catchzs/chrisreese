@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Random Feed</title>
+<style>
+  :root{ --bg:#0b0d14; --gap:0; }
+  html,body{height:100%;margin:0}
+  body{background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:var(--gap);width:100vw;height:100vh}
+  .tile{position:relative;overflow:hidden;cursor:default}
+  .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .tile button, .tile a{all:unset;position:absolute;inset:0;cursor:default}
+  .center{background:var(--bg);display:grid;place-items:center}
+  .overlay{display:flex;align-items:center;gap:112px justify-content:center; }
+  .overlay a, .overlay button{all:unset;cursor:pointer}
+  .overlay .home img{width:112px;height:112px;display:block}
+  .overlay .refresh{ width:220px;height:220px;border-radius:9999px;background:#fff;color:#000;display:grid;place-items:center;font-size:192px;line-height:1; }
+  .overlay .help{font-size:112px;color:#fff;line-height:1}
+  .overlay .refresh:active{transform:scale(.96)}
+  .overlay .help:active{transform:scale(.96)}
+</style>
+</head>
+<body>
+  <div class="grid" id="feed">
+    <div class="tile"><a href="#"></a></div>
+    <div class="tile"><a href="#"></a></div>
+    <div class="tile"><a href="#"></a></div>
+    <div class="tile"><a href="#"></a></div>
+    <div class="tile center">
+      <div class="overlay">
+        <a class="home" href="index.html" title="Home"><img src="pixel_brain.gif" alt="home"></a>
+        <button class="refresh" title="Refresh" aria-label="Refresh">↻</button>
+        <button class="help" title="About this feed" aria-label="Help">?</button>
+      </div>
+    </div>
+    <div class="tile"><a href="#"></a></div>
+    <div class="tile"><a href="#"></a></div>
+    <div class="tile"><a href="#"></a></div>
+    <div class="tile"><a href="#"></a></div>
+  </div>
+<script>
+  const pool = []; // replace with image paths later
+  const tiles = [...document.querySelectorAll('#feed .tile')].filter((_,i)=>i!==4);
+  const refreshBtn = document.querySelector('.refresh');
+  function loadRandom(){
+    tiles.forEach(t => {
+      const img = t.querySelector('img');
+      if (img) img.remove();
+      if (pool.length){
+        const pick = pool[Math.floor(Math.random()*pool.length)];
+        const el = document.createElement('img');
+        el.src = pick; el.alt = ''; t.appendChild(el);
+      }
+    });
+  }
+  refreshBtn?.addEventListener('click', loadRandom);
+</script>
+</body>
+</html>

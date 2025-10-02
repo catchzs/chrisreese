@@ -18,22 +18,26 @@
   .circle:hover{filter:brightness(.85)}
   .label{position:absolute;inset:0;display:grid;place-items:center;color:#000;font-weight:800;letter-spacing:.04em;font-size:var(--title);opacity:0;transition:opacity .85s ease;text-transform:uppercase;text-align:center;padding:0 6%;z-index:2}
   .circle:hover .label{opacity:1}
-  .red{background:var(--red)}.blue{background:var(--blue)}.yellow{background:var(--yellow)}.white{background:var(--white)}
-  .white{grid-column:1/2;grid-row:2}.static{grid-column:3/4;grid-row:2}
+  .red{background:var(--red)} .yellow{background:var(--yellow)} .blue{background:var(--blue)} .white{background:var(--white)}
+  .red{grid-column:1/2;grid-row:1}.random{grid-column:2/3;grid-row:1}.yellow{grid-column:3/4;grid-row:1}.white{grid-column:1/2;grid-row:2}.blue{grid-column:3/4;grid-row:2}
+  .fill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .random{background:url('tv_static.gif') center/cover no-repeat}
+  /* two-line stack just for the random-feed label */
+  .stack{display:flex;flex-direction:column;align-items:center;gap:.15em;line-height:1}
 </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="circle red"    onclick="go('cv.html')"    title="CV"><div class="label">CV</div></div>
-    <div class="circle blue"   onclick="go('info.html')"  title="portfolio"><div class="label">portfolio</div></div>
-    <div class="circle yellow" onclick="go('other.html')" title="info"><div class="label">info</div></div>
-    <div class="circle white"  onclick="go('me.html')"    title="me"><div class="label">me</div></div>
-
-    <!-- Socials with GIF background -->
-    <div class="circle static" onclick="go('socials.html')" title="socials"
-         style="background:url('tv_static.gif') center/cover no-repeat;">
-      <div class="label">socials</div>
+    <div class="circle red"    onclick="go('one.html')"         title="[1]"><div class="label">[1]</div></div>
+    <div class="circle random" onclick="go('random-feed.html')" title="random feed">
+      <div class="label"><div class="stack"><span>random</span><span>feed</span></div></div>
     </div>
+    <div class="circle yellow" onclick="go('two.html')"         title="[2]"><div class="label">[2]</div></div>
+    <div class="circle white"  onclick="go('cv.html')"          title="CV">
+      <img class="fill" src="comp_paper.jpg?v=2" alt="">
+      <div class="label">CV</div>
+    </div>
+    <div class="circle blue"   onclick="go('three.html')"       title="[3]"><div class="label">[3]</div></div>
   </div>
 <script>const go=href=>location.href=href;</script>
 </body>
